@@ -1,48 +1,9 @@
-# import pandas as pd
-# import folium
-# import streamlit as st
-#
-# from folium.plugins import HeatMap
-#
-# df = pd.read_csv("Loan-Portfolio-data.csv")
-#
-# st.title("Loan Portfolio Risk Map")
-#
-# status_filter = st.multiselect(
-#     "Select Status",
-#     options=df["Status"].unique(),
-#     default=df["Status"].unique()
-# )
-#
-# filtered = df[df["Status"].isin(status_filter)]
-#
-# m = folium.Map(location=[22.5, 78.9], zoom_start=5)
-#
-# color_map = {
-#     "Active": "green",
-#     "Closed": "gray",
-#     "Delinquent": "red"
-# }
-#
-# for _, row in filtered.iterrows():
-#     folium.CircleMarker(
-#         location=[row["Latitude"], row["Longitude"]],
-#         radius=6,
-#         color=color_map[row["Status"]],
-#         fill=True,
-#         popup=f"{row['City']} | {row['Status']} | ₹{row['Loan Amount']}"
-#     ).add_to(m)
-#
-# heat_data = filtered[filtered["Status"] == "Delinquent"][["Latitude", "Longitude"]].values
-# HeatMap(heat_data).add_to(m)
-#
-# st.components.v1.html(m._repr_html_(), height=600)
-
-
 
 import pandas as pd
 import folium
+from streamlit_folium import st_folium
 import streamlit as st
+import matplotlib.pyplot as plt
 
 # Load data
 # df = pd.read_csv("Loan-Portfolio-data.csv")
@@ -109,6 +70,7 @@ filtered_df = df[
 
 # Create map
 m = folium.Map(location=[22.5, 78.9], zoom_start=5)
+st_folium(m,width = 700)
 
 # color_map = {
 #     "A": "green",
